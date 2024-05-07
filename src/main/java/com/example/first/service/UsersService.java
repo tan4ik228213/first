@@ -1,6 +1,8 @@
 package com.example.first.service;
 
+import com.example.first.dto.UsersRequestDto;
 import com.example.first.dto.UsersResponseDto;
+import com.example.first.models.Users;
 import com.example.first.repository.UsersRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,4 +30,18 @@ public class UsersService {
         ).collect(Collectors.toList());
     }
 
+    public void addNewUser(UsersRequestDto usersRequestDto){
+        Users insertAddUsers = Users.builder()
+                .login(usersRequestDto.getLogin())
+                .password(usersRequestDto.getPassword())
+                .first_name(usersRequestDto.getFirstName())
+                .last_name(usersRequestDto.getLastName())
+                .patronymic_name(usersRequestDto.getPatronymicName())
+                .age(usersRequestDto.getAge())
+                .build();
+        usersRepository.save(insertAddUsers);
+
+    }
+
 }
+
