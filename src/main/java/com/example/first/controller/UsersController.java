@@ -20,6 +20,7 @@ public class UsersController {
     public List<UsersResponseDto> getAllUsers() {
 
         return usersService.getAll();
+
     }
 
 @PostMapping(value = "/add-user")

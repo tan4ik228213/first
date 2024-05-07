@@ -65,4 +65,5 @@ public class UsersService {
                 .build();
         usersRepository.updateUsersById(id, patchUser);
         }
+
     }

@@ -13,6 +13,7 @@ public class UsersResponseDto {
 
     private String login;
 
+
     private String password;
 
     private String firstName;
