@@ -2,6 +2,7 @@ package com.example.first.controller;
 
 import com.example.first.dto.UsersRequestDto;
 import com.example.first.dto.UsersResponseDto;
+import com.example.first.models.Users;
 import com.example.first.service.UsersService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -27,4 +28,19 @@ public class UsersController {
         usersService.addNewUser(usersRequestDto);
 }
 
+    @GetMapping(value = "/get-one-user/{id}")
+
+    public Users userFindById(@PathVariable int id){
+        return usersService.findUserById(id);
+    }
+
+    @DeleteMapping(value = "/delete-user/{id}")
+
+    public Users deleteUserById(@PathVariable int id){
+        return usersService.deleteUserById(id);
+    }
+    @PatchMapping(value = "patch-user/{id}")
+    public void updateUserById(@PathVariable @RequestBody int id, UsersRequestDto usersRequestDto){
+        usersService.patchUserById(usersRequestDto,id);
+    }
 }
