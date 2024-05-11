@@ -44,4 +44,8 @@ public class UsersController {
     public void updateUserById(@PathVariable @RequestBody int id, UsersRequestDto usersRequestDto){
         usersService.patchUserById(usersRequestDto,id);
     }
+    @GetMapping(value = "/all")
+    public List <UsersResponseDto> getTest () {
+        return usersService.testGet();
+    }
 }

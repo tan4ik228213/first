@@ -66,4 +66,17 @@ public class UsersService {
         usersRepository.updateUsersById(id, patchUser);
         }
 
+    public List<UsersResponseDto> testGet() {
+        return usersRepository.getAll().stream().map(
+                users -> UsersResponseDto.builder()
+                        .firstName(users.getFirst_name())
+                        .lastName(users.getLast_name())
+                        .patronymicName(users.getPatronymic_name())
+                        .login(users.getLogin())
+                        .password(users.getPassword())
+                        .age(users.getAge())
+                        .build()
+        ).collect(Collectors.toList());
+    }
+
     }

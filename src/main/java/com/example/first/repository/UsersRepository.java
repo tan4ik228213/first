@@ -4,7 +4,10 @@ import com.example.first.models.Users;
 import jakarta.transaction.Transactional;
 import org.apache.catalina.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 @Transactional
@@ -17,4 +20,6 @@ Users users = new Users();
 
     Users updateUsersById (int id, Users users);
 
+    @Query(value = "SELECT * FROM users" , nativeQuery = true)
+    List<Users> getAll ();
 }
