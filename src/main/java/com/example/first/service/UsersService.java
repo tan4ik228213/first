@@ -18,7 +18,7 @@ public class UsersService {
 
     private final UsersRepository usersRepository;
 
-    public List<UsersResponseDto> getAll(){
+    public List<UsersResponseDto> getAll() {
         return usersRepository.findAll().stream().map(
                 users -> UsersResponseDto.builder()
                         .login(users.getLogin())
@@ -32,7 +32,7 @@ public class UsersService {
         ).collect(Collectors.toList());
     }
 
-    public void addNewUser(UsersRequestDto usersRequestDto){
+    public void addNewUser(UsersRequestDto usersRequestDto) {
         Users insertAddUsers = Users.builder()
                 .login(usersRequestDto.getLogin())
                 .password(usersRequestDto.getPassword())
@@ -44,27 +44,15 @@ public class UsersService {
         usersRepository.save(insertAddUsers);
 
     }
-    public Users findUserById(int id){
+
+    public Users findUserById(int id) {
         return usersRepository.getUsersById(id);
     }
 
-    public Users deleteUserById(int id){
+    public Users deleteUserById(int id) {
         return usersRepository.deleteById(id);
 
-        }
-
-        public Users patchUserById(UsersRequestDto usersRequestDto, int id){
-        findUserById(id);
-        Users patchUser = Users.builder()
-        .login(usersRequestDto.getLogin())
-                    .password(usersRequestDto.getPassword())
-                    .first_name(usersRequestDto.getFirstName())
-                    .last_name(usersRequestDto.getLastName())
-                    .patronymic_name(usersRequestDto.getPatronymicName())
-                    .age(usersRequestDto.getAge())
-                .build();
-        usersRepository.updateUsersById(id, patchUser);
-        }
+    }
 
     public List<UsersResponseDto> testGet() {
         return usersRepository.getAll().stream().map(
@@ -77,6 +65,23 @@ public class UsersService {
                         .age(users.getAge())
                         .build()
         ).collect(Collectors.toList());
-    }
+
+
 
     }
+    public Users patchUser (int id, UsersRequestDto usersRequestDto) {
+        Users findUserFromDb = usersRepository.findUsersById(id);
+        if (findUserFromDb != null) {
+            findUserFromDb.setFirst_name(usersRequestDto.getFirstName());
+            findUserFromDb.setLast_name(usersRequestDto.getLastName());
+            findUserFromDb.setPatronymic_name(usersRequestDto.getPatronymicName());
+            findUserFromDb.setLogin(usersRequestDto.getLogin());
+            findUserFromDb.setPassword(usersRequestDto.getPassword());
+            findUserFromDb.setAge(usersRequestDto.getAge());
+            return usersRepository.save(findUserFromDb);
+        } else {
+            System.out.println("error");
+        }
+        return findUserFromDb;
+    }
+}

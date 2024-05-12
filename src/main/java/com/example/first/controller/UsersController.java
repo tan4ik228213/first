@@ -23,29 +23,32 @@ public class UsersController {
 
     }
 
-@PostMapping(value = "/add-user")
-    public void insertUser(@RequestBody UsersRequestDto usersRequestDto){
+    @PostMapping(value = "/add-user")
+    public void insertUser(@RequestBody UsersRequestDto usersRequestDto) {
 
         usersService.addNewUser(usersRequestDto);
-}
+    }
 
     @GetMapping(value = "/get-one-user/{id}")
 
-    public Users userFindById(@PathVariable int id){
+    public Users userFindById(@PathVariable int id) {
         return usersService.findUserById(id);
     }
 
     @DeleteMapping(value = "/delete-user/{id}")
 
-    public Users deleteUserById(@PathVariable int id){
+    public Users deleteUserById(@PathVariable int id) {
         return usersService.deleteUserById(id);
     }
-    @PatchMapping(value = "patch-user/{id}")
-    public void updateUserById(@PathVariable @RequestBody int id, UsersRequestDto usersRequestDto){
-        usersService.patchUserById(usersRequestDto,id);
-    }
+
     @GetMapping(value = "/all")
-    public List <UsersResponseDto> getTest () {
+    public List<UsersResponseDto> getTest() {
         return usersService.testGet();
+    }
+
+    @PatchMapping(value = "/patch-user/{id}")
+
+    public Users patchUserById(@PathVariable int id, @RequestBody UsersRequestDto usersRequestDto){
+        return usersService.patchUser(id, usersRequestDto);
     }
 }

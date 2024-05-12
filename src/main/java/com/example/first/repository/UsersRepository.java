@@ -11,15 +11,15 @@ import java.util.List;
 
 @Repository
 @Transactional
-public interface UsersRepository extends JpaRepository <Users,Integer>{
-Users users = new Users();
-    Users getUsersById (int id);
+public interface UsersRepository extends JpaRepository<Users, Integer> {
+    Users users = new Users();
 
-    Users deleteById (int id);
+    Users getUsersById(int id);
 
+    Users deleteById(int id);
 
-    Users updateUsersById (int id, Users users);
+    @Query(value = "SELECT * FROM users", nativeQuery = true)
+    List<Users> getAll();
 
-    @Query(value = "SELECT * FROM users" , nativeQuery = true)
-    List<Users> getAll ();
+    Users findUsersById(int id);
 }

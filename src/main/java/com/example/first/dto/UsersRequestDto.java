@@ -11,17 +11,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UsersRequestDto {
 
-private String login;
+    private String login;
 
-private String password;
+    private String password;
 
-private String firstName;
+    private String firstName;
 
-private String lastName;
+    private String lastName;
 
-private String patronymicName;
+    private String patronymicName;
 
-private int age;
+    private int age;
 
 
 }
