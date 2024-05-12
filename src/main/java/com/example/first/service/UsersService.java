@@ -2,7 +2,9 @@ package com.example.first.service;
 
 import com.example.first.dto.UsersRequestDto;
 import com.example.first.dto.UsersResponseDto;
+import com.example.first.models.GenderName;
 import com.example.first.models.Users;
+import com.example.first.repository.GenderRep;
 import com.example.first.repository.UsersRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -17,7 +19,7 @@ import java.util.stream.Collectors;
 public class UsersService {
 
     private final UsersRepository usersRepository;
-
+    private final GenderRep genderRep;
     public List<UsersResponseDto> getAll() {
         return usersRepository.findAll().stream().map(
                 users -> UsersResponseDto.builder()
@@ -34,6 +36,7 @@ public class UsersService {
     }
 
     public void addNewUser(UsersRequestDto usersRequestDto) {
+        GenderName findGenderById = genderRep.findById(usersRequestDto.getGender()).get();
         Users insertAddUsers = Users.builder()
                 .login(usersRequestDto.getLogin())
                 .password(usersRequestDto.getPassword())
@@ -41,6 +44,7 @@ public class UsersService {
                 .last_name(usersRequestDto.getLastName())
                 .patronymic_name(usersRequestDto.getPatronymicName())
                 .age(usersRequestDto.getAge())
+                .genderName(findGenderById)
                 .build();
         usersRepository.save(insertAddUsers);
 
