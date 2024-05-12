@@ -21,6 +21,8 @@ public class UsersRequestDto {
 
     private String patronymicName;
 
+    private String gender;
+
     private int age;
 
 

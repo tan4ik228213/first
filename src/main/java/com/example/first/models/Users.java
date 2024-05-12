@@ -31,6 +31,10 @@ public class Users {
     @Column(name = "patronymic_name")
     private String patronymic_name;
 
+    @ManyToOne
+    @JoinColumn (name = "gender_id")
+    private GenderName genderName;
+
     @Column(name = "age")
     private int age;
 

@@ -27,6 +27,7 @@ public class UsersService {
                         .lastName(users.getLast_name())
                         .patronymicName(users.getPatronymic_name())
                         .age(users.getAge())
+                        .gender(users.getGenderName().getGenderName())
                         .build()
 
         ).collect(Collectors.toList());
